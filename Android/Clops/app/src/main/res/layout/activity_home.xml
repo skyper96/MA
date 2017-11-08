@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF"
+    android:weightSum="1">
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="283dp"
+        android:layout_weight="0.80"
+        android:dividerHeight="10dp"
+        android:footerDividersEnabled="true" />
+
+    <EditText
+        android:id="@+id/editTextShopName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Shop Name"/>
+
+    <EditText
+        android:id="@+id/editTextShopAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Shop Address" />
+
+    <EditText
+        android:id="@+id/editTextShopEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Shop Email" />
+
+    <EditText
+        android:id="@+id/editTextShopNetIncome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Shop Net Income" />
+
+    <Button
+        android:id="@+id/btnRequestAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#34495e"
+        android:onClick="btnRequestAddOnClick"
+        android:text="Shop Add Request"
+        android:textColor="#FFF" />
+</LinearLayout>
