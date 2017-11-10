@@ -1,8 +1,25 @@
 import React, { Component }from 'react';
 
-import { StyleSheet, Text, View, Image, KeyboardAvoidingView, StatusBar, TextInput, TouchableOpacity, Linking, ListView } from 'react-native';
+import { Alert, StyleSheet, Text, View, Image, KeyboardAvoidingView, StatusBar, TextInput, TouchableOpacity, Linking, ListView } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import MailCore from 'react-native-mailcore';
+
+let MainDataSource = [
+    {
+      name: "Auchan",
+      address: "Alexandru Vaida Voevod nr. 53",
+      email: "auchan@auchan.ro",
+      netIncome: "154m"
+    },
+    {
+      name: "Profi",
+      address: "Decebal nr.21",
+      email: "cluj@profi.ro",
+      netIncome: "70m"
+    },
+  ]
+
+let currentShop = MainDataSource[0]
 
 export default class App extends Component {
   render() {
@@ -49,20 +66,7 @@ class ListDetails extends Component {
   constructor() {
     super();
     this.state = {
-      dataSource: ds.cloneWithRows([
-        {
-          name: "Auchan",
-          address: "Alexandru Vaida Voevod nr. 53",
-          email: "auchan@auchan.ro",
-          netIncome: "154m"
-        },
-        {
-          name: "Profi",
-          address: "Decebal nr.21",
-          email: "cluj@profi.ro",
-          netIncome: "70m"
-        },
-      ]),
+      dataSource: ds.cloneWithRows(MainDataSource),
     };
   }
 
@@ -76,8 +80,18 @@ class ListDetails extends Component {
           <Text style={{ color: 'white' }}>{rowData.address}</Text> 
           <Text style={{ color: 'white' }}>{rowData.email}</Text> 
           <Text style={{ color: 'white' }}>{rowData.netIncome}</Text> 
+          <TouchableOpacity 
+          onPress={() => {
+            currentShop=rowData;
+            this.props.navigation.navigate('Manage')
+            }
+          }
+          style={styles.buttonContainer}>
+          <Text style={styles.buttonText}>Manage Shop</Text>
+          </TouchableOpacity>
           </View>
         }
+        
       />
     );
   }
@@ -149,12 +163,94 @@ class AddShop extends Component {
   }
 }
 
+class ManageShop extends Component {
+  constructor() {
+    super();
+    this.state = {name: currentShop.name, address: currentShop.address, email: currentShop.email, netIncome: currentShop.netIncome};
+  }
 
+  render() {
+    return (
+      <View>
+      <TextInput 
+      editable={false}
+      placeholder="Shop Name"
+      placeholderTextColor="rgba(0,0,0,0.7)"
+      autoCapitalize="none"
+      autoCorrect={false}
+      style={styles.homeInput} 
+      defaultValue={currentShop.name}
+      ref={(input) => this.shopName = input}
+      />
+    <TextInput 
+      defaultValue="Shop Address"
+      placeholderTextColor="rgba(0,0,0,0.7)"
+      returnKeyType="next"
+      onSubmitEditing={() => this.shopEmail.focus()}
+      autoCapitalize="none"
+      onChangeText={(shopAddress) => this.setState({address: shopAddress})}
+      autoCorrect={false}
+      style={styles.homeInput} 
+      defaultValue={currentShop.address}
+      ref={(input) => this.shopAddress = input}
+      />
+    <TextInput 
+      placeholder="Shop Email"
+      placeholderTextColor="rgba(0,0,0,0.7)"
+      returnKeyType="next"
+      onSubmitEditing={() => this.shopNetIncome.focus()}
+      autoCapitalize="none"
+      onChangeText={(shopEmail) => this.setState({email: shopEmail})}
+      autoCorrect={false}
+      style={styles.homeInput} 
+      defaultValue={currentShop.email}
+      ref={(input) => this.shopEmail = input}
+      />
+    <TextInput 
+      placeholder="Shop Net Income"
+      placeholderTextColor="rgba(0,0,0,0.7)"
+      returnKeyType="next"
+      autoCapitalize="none"
+      onChangeText={(shopNetIncome) => this.setState({netIncome: shopNetIncome})}
+      autoCorrect={false}
+      style={styles.homeInput} 
+      defaultValue={currentShop.netIncome}
+      ref={(input) => this.shopNetIncome = input}
+      />
+    <TouchableOpacity 
+    onPress={() => 
+      {
+        currentShop.address = this.state.address;
+        currentShop.email = this.state.email;
+        currentShop.netIncome = this.state.netIncome;
+        for(let i = 0; i < MainDataSource.length; i++)
+        {
+          if (MainDataSource[i].name == currentShop.name){
+            MainDataSource[i] = currentShop
+          }
+        }
+        this.props.navigation.navigate('Home')
+      }
+    }
+    style={styles.buttonContainer}>
+    <Text style={styles.buttonText}>Edit</Text>
+    </TouchableOpacity>
+    </View>
+    );
+  }
+}
 
 const Home = ({ navigation }) => (
   <View style={styles.homeContainer}>
-  <ListDetails />
+  <ListDetails navigation={navigation}/>
   <AddShop />
+  
+  </View>
+);
+
+const Manage = ({ navigation }) => (
+  <View style={styles.homeContainer}>
+  <ManageShop navigation={navigation}/>
   
   </View>
 );
@@ -165,38 +261,41 @@ const HomeStack = StackNavigator({
   Login: {
     screen: Login,
     navigationOptions: {
-      title: 'Login',
+      title: 'Login'
     },
   },
   Home: {
-  screen: Home,
+    screen: Home,
     navigationOptions: {
       title: 'Home',
       backTitle: 'Log Out'
     },
   },
+  Manage: {
+    screen: Manage,
+    navigationOptions: {
+      title: 'Manage'
+    }
+  }
 });
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#34495e',
-    alignItems: 'center',
     justifyContent: 'center',
   },
   homeContainer: {
     flex: 1,
     backgroundColor: '#34495e',
-    alignItems: 'center',
     justifyContent: 'center',
   },
   header: {
-    alignItems: 'center',
     justifyContent: 'center'
   },
 	logoContainer: {
+    alignItems: 'center',
     flexGrow: 1,
-		alignItems: 'center',
 		justifyContent: 'center',
 	},
 	logo: {
