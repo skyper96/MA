@@ -5,23 +5,16 @@
     android:background="#FFF"
     android:weightSum="1">
 
-    <com.github.mikephil.charting.charts.PieChart
-        android:layout_width="match_parent"
-        android:layout_height="203dp"
-        android:id="@+id/idPieChart">
-        ></com.github.mikephil.charting.charts.PieChart>
-
     <EditText
-        android:id="@+id/editTextShopName"
+        android:id="@+id/editTextShopNameAdd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:enabled="false"
         android:ems="10"
         android:hint="Shop Name"
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/editTextShopAddress"
+        android:id="@+id/editTextShopAddressAdd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -29,7 +22,7 @@
         android:hint="Shop Address" />
 
     <EditText
-        android:id="@+id/editTextShopEmail"
+        android:id="@+id/editTextShopEmailAdd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -37,7 +30,7 @@
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/editTextShopNetIncome"
+        android:id="@+id/editTextShopNetIncomeAdd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -49,16 +42,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#34495e"
-        android:onClick="btnEditOnClick"
-        android:text="Edit"
+        android:onClick="btnAddOnClick"
+        android:text="Add"
         android:textColor="#FFF" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#34495e"
-        android:onClick="btnDeleteOnClick"
-        android:text="Delete"
-        android:textColor="#FFF" />
 </LinearLayout>

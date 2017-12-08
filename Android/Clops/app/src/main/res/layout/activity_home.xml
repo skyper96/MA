@@ -13,44 +13,12 @@
         android:dividerHeight="10dp"
         android:footerDividersEnabled="true" />
 
-    <EditText
-        android:id="@+id/editTextShopName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Shop Name"/>
-
-    <EditText
-        android:id="@+id/editTextShopAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Shop Address" />
-
-    <EditText
-        android:id="@+id/editTextShopEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Shop Email"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/editTextShopNetIncome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Shop Net Income" />
-
     <Button
         android:id="@+id/btnRequestAdd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#34495e"
-        android:onClick="btnRequestAddOnClick"
-        android:text="Shop Add Request"
+        android:onClick="btnAddShopOnClick"
+        android:text="Add shop"
         android:textColor="#FFF" />
 </LinearLayout>
